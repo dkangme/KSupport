@@ -6,10 +6,10 @@
     <table>
         <thead>
             <tr>
-                <th>Timestampapertura</th>
-                <th>Timestampcierre</th>
+                <th>Apertura</th>
+                <th>Cierre</th>
                 <th>Estado</th>
-                <th>Descripcion</th>
+                <th width="40%">Descripcion</th>
                 <th>Id</th>
                 <th>Actions</th>
             </tr>
@@ -26,6 +26,9 @@
                     <ul>
                         <li>
                             <a href="{{ path('data_ticket_new', { 'id': requerimiento.id }) }}">nuevo ticket</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('data_ticket_list', { 'id': requerimiento.id }) }}">mostrar tickets asociados</a>
                         </li>
                     </ul>
                 </td>

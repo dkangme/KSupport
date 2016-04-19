@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ticket list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Asignado a</th>
+                <th>Solicitado por</th>
+                <th width="40%">Descripcion</th>
+                <th>Apertura</th>
+                <th>Cierre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.estado }}</td>
+                <td>{{ ticket.agente.nombreCompleto}}</td>
+                <td>{{ ticket.requerimiento.usuario.nombreCompleto}}</td>
+                <td><a href="{{ path('data_ticket_show', { 'id': ticket.id }) }}">{{ ticket.descripcion | raw }}</a></td>
+                <td>{% if ticket.apertura %}{{ ticket.apertura|date('d-m-Y H:i') }}{% endif %}</td>
+                <td>{% if ticket.cierre %}{{ ticket.cierre|date('d-m-Y H:i') }}{% endif %}</td>
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('data_ticket_show', { 'id': ticket.id }) }}">Cambiar Estado</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

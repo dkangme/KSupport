@@ -140,4 +140,30 @@ class TicketController extends Controller
             ->getForm()
         ;
     }
+
+
+    /**
+     * List all ticket associated with Requerimiento
+     * @Route("/list/{id}", name="data_ticket_list")
+     * @Method("GET")
+     *
+     */
+    public function listAction(Requerimiento $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery('
+            SELECT p FROM AppBundle:Ticket p
+            WHERE p.requerimiento = :requerimiento
+            ORDER BY p.apertura ASC
+            ')
+            ->setParameter('requerimiento', $id);
+
+        $tickets = $query->getResult();
+
+        return $this->render('ticket/list.html.twig', array(
+            'tickets' => $tickets,
+        ));
+    }
+
 }
