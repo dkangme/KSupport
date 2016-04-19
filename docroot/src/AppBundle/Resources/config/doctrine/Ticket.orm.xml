@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Ticket" table="ticket">
+    <indexes>
+      <index name="fk_ticket_Agente1_idx" columns="Agente_id"/>
+      <index name="fk_ticket_Requerimiento1_idx" columns="Requerimiento_id"/>
+      <index name="fk_ticket_Tipo1_idx" columns="Tipo_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="descripcion" length="1024" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apertura" type="datetime" column="apertura" nullable="true"/>
+    <field name="cierre" type="datetime" column="cierre" nullable="true"/>
+    <field name="estado" type="string" column="estado" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="tipo" target-entity="Tipo" fetch="LAZY">
+      <join-columns>
+        <join-column name="Tipo_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="requerimiento" target-entity="Requerimiento" fetch="LAZY">
+      <join-columns>
+        <join-column name="Requerimiento_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="agente" target-entity="Agente" fetch="LAZY">
+      <join-columns>
+        <join-column name="Agente_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

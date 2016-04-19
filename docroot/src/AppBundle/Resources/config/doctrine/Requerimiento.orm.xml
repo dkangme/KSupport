@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Requerimiento" table="Requerimiento">
+    <indexes>
+      <index name="fk_Requerimiento_Usuario_idx" columns="Usuario_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="timestampApertura" type="datetime" column="timestamp_apertura" nullable="false"/>
+    <field name="timestampCierre" type="datetime" column="timestamp_cierre" nullable="true"/>
+    <field name="estado" type="string" column="estado" length="24" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="descripcion" length="1024" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="usuario" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="Usuario_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

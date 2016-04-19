@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ticket</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th width="15%">Descripcion</th>
+                <td>{{ ticket.descripcion | raw }}</td>
+            </tr>
+            <tr>
+                <th>Apertura</th>
+                <td>{% if ticket.apertura %}{{ ticket.apertura|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Cierre</th>
+                <td>{% if ticket.cierre %}{{ ticket.cierre|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Agente</th>
+                <td>{{ ticket.agente.nombreCompleto }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ ticket.estado }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('data_ticket_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('data_ticket_edit', { 'id': ticket.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

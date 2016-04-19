@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Requerimiento list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Timestampapertura</th>
+                <th>Timestampcierre</th>
+                <th>Estado</th>
+                <th>Descripcion</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for requerimiento in requerimientos %}
+            <tr>
+                <td><a href="{{ path('data_requerimiento_show', { 'id': requerimiento.id }) }}">{{ requerimiento.timestampApertura | date('d-m-Y H:i') }}</a></td>
+                <td>{% if requerimiento.timestampCierre %}{{ requerimiento.timestampCierre|date('d-m-Y H:i') }}{% endif %}</td>
+                <td>{{ requerimiento.estado }}</td>
+                <td>{{ requerimiento.descripcion | raw }}</td>
+                <td>{{ requerimiento.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('data_ticket_new', { 'id': requerimiento.id }) }}">nuevo ticket</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('data_requerimiento_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

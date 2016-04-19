@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tipo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Costo</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo in tipos %}
+            <tr>
+                <td><a href="{{ path('data_tipo_show', { 'id': tipo.id }) }}">{{ tipo.descripcion }}</a></td>
+                <td>{{ tipo.costo }}</td>
+                <td>{{ tipo.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('data_tipo_show', { 'id': tipo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('data_tipo_edit', { 'id': tipo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('data_tipo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

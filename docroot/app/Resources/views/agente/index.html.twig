@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agente list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombrecompleto</th>
+                <th>Correo</th>
+                <th>Anexo</th>
+                <th>Avatar</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agente in agentes %}
+            <tr>
+                <td><a href="{{ path('data_agente_show', { 'id': agente.id }) }}">{{ agente.nombreCompleto }}</a></td>
+                <td>{{ agente.correo }}</td>
+                <td>{{ agente.anexo }}</td>
+                <td>{{ agente.avatar }}</td>
+                <td>{{ agente.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('data_agente_show', { 'id': agente.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('data_agente_edit', { 'id': agente.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('data_agente_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

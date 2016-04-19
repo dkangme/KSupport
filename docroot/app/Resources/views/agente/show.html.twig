@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agente</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nombrecompleto</th>
+                <td>{{ agente.nombreCompleto }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>{{ agente.correo }}</td>
+            </tr>
+            <tr>
+                <th>Anexo</th>
+                <td>{{ agente.anexo }}</td>
+            </tr>
+            <tr>
+                <th>Avatar</th>
+                <td>{{ agente.avatar }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ agente.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('data_agente_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('data_agente_edit', { 'id': agente.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
